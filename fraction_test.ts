@@ -1,4 +1,4 @@
-import { assertAlmostEquals, assertEquals } from "@std/assert";
+import { assertAlmostEquals, assertEquals, assertThrows } from "@std/assert";
 import { Fraction } from "./fraction.ts";
 
 Deno.test("fraction of 1/1 is 1.0", () => {
@@ -33,4 +33,82 @@ Deno.test("1/3 + 2/6 = 2/3 is roughly 0.67", () => {
 
   // Assert
   assertAlmostEquals(left.toFloat(0.01), 0.67);
+});
+
+Deno.test("2/3 - 1/3 = 1/3 is roughly 0.33", () => {
+  // Arrange
+  const left = new Fraction(2, 3);
+  const right = new Fraction(1, 3);
+
+  // Act
+  left.subtract(right);
+
+  // Assert
+  assertEquals(left.toFloat(0.01), 0.33);
+});
+
+Deno.test("2/3 * 1/2 = 2/6 is roughly 0.33", () => {
+  // Arrange
+  const left = new Fraction(2, 3);
+  const right = new Fraction(1, 2);
+
+  // Act
+  left.multiply(right);
+
+  // Assert
+  assertEquals(left.toFloat(0.01), 0.33);
+});
+
+Deno.test("2/3 : 1/2 = 4/3 is roughly 1.33", () => {
+  // Arrange
+  const left = new Fraction(2, 3);
+  const right = new Fraction(1, 2);
+
+  // Act
+  left.divide(right);
+
+  // Assert
+  assertEquals(left.toFloat(0.01), 1.33);
+});
+
+Deno.test("2/3 formats to string '2/3'", () => {
+  // Arrange
+  const fraction = new Fraction(2, 3);
+
+  // Act
+  const result = fraction.toString();
+
+  // Assert
+  assertEquals(result, "2/3");
+});
+
+Deno.test("'2/3' parses to the fraction 2/3", () => {
+  // Arrange
+  const raw = "2/3";
+
+  // Act
+  const fraction = Fraction.parse(raw);
+
+  // Assert
+  assertEquals(fraction.toString(), raw);
+});
+
+Deno.test("2/3/4 is not allowed (too many numbers)", () => {
+  // Arrange
+  const raw = "2/3/4";
+
+  // Act & Assert
+  assertThrows(() => {
+    Fraction.parse(raw);
+  }, `illegal syntax: "[numerator]/[denominator]" required`);
+});
+
+Deno.test("a/2 is not allowed ('a' not numeric)", () => {
+  // Arrange
+  const raw = "a/2";
+
+  // Act & Assert
+  assertThrows(() => {
+    Fraction.parse(raw);
+  }, "non-numeric numerator/denominator");
 });
