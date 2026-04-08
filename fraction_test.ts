@@ -112,3 +112,10 @@ Deno.test("a/2 is not allowed ('a' not numeric)", () => {
     Fraction.parse(raw);
   }, "non-numeric numerator/denominator");
 });
+
+Deno.test("3/0 must not be allowed", () => {
+  // Arrange/Act/Assert
+  assertThrows(() => {
+    new Fraction(3, 0);
+  }, "division by zero is undefined");
+});

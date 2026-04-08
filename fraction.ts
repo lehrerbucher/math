@@ -4,7 +4,11 @@ export class Fraction {
   constructor(
     private numerator: number,
     private denominator: number,
-  ) {}
+  ) {
+    if (denominator == 0) {
+      throw new Error("division by zero is undefined");
+    }
+  }
 
   public add(other: Fraction) {
     const newNumerator =
