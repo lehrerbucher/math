@@ -6,6 +6,9 @@ const oneFourth: Fraction = new Fraction(1, 4);
 console.log(`one third: ${oneThird} = ${oneThird.toFloat(0.01)}`);
 console.log(`one fourth: ${oneFourth} = ${oneFourth.toFloat(0.01)}`);
 
+const result = oneThird.add(oneFourth);
+console.log(`${oneThird} + ${oneFourth} = ${result}`);
+
 const parsed = Fraction.parse("5 / 6");
 console.log(`${parsed} ~= ${parsed.toFloat(0.01)}`);
 

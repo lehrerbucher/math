@@ -29,10 +29,10 @@ Deno.test("1/3 + 2/6 = 2/3 is roughly 0.67", () => {
   const right = new Fraction(2, 6);
 
   // Act
-  left.add(right);
+  const result = left.add(right);
 
   // Assert
-  assertAlmostEquals(left.toFloat(0.01), 0.67);
+  assertAlmostEquals(result.toFloat(0.01), 0.67);
 });
 
 Deno.test("2/3 - 1/3 = 1/3 is roughly 0.33", () => {
@@ -41,10 +41,10 @@ Deno.test("2/3 - 1/3 = 1/3 is roughly 0.33", () => {
   const right = new Fraction(1, 3);
 
   // Act
-  left.subtract(right);
+  const result = left.subtract(right);
 
   // Assert
-  assertEquals(left.toFloat(0.01), 0.33);
+  assertEquals(result.toFloat(0.01), 0.33);
 });
 
 Deno.test("2/3 * 1/2 = 2/6 is roughly 0.33", () => {
@@ -53,10 +53,10 @@ Deno.test("2/3 * 1/2 = 2/6 is roughly 0.33", () => {
   const right = new Fraction(1, 2);
 
   // Act
-  left.multiply(right);
+  const result = left.multiply(right);
 
   // Assert
-  assertEquals(left.toFloat(0.01), 0.33);
+  assertEquals(result.toFloat(0.01), 0.33);
 });
 
 Deno.test("2/3 : 1/2 = 4/3 is roughly 1.33", () => {
@@ -65,10 +65,10 @@ Deno.test("2/3 : 1/2 = 4/3 is roughly 1.33", () => {
   const right = new Fraction(1, 2);
 
   // Act
-  left.divide(right);
+  const result = left.divide(right);
 
   // Assert
-  assertEquals(left.toFloat(0.01), 1.33);
+  assertEquals(result.toFloat(0.01), 1.33);
 });
 
 Deno.test("2/3 formats to string '2/3'", () => {
