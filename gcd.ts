@@ -1,5 +1,3 @@
-import { MockInterceptor } from "asset:///node/undici/mock-interceptor.d.ts";
-
 export function gcdBruteForce(a: number, b: number): number {
   const min = a < b ? a : b;
   const n = Math.floor(min / 2);

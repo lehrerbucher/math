@@ -1,9 +1,4 @@
-import {
-  assertAlmostEquals,
-  assertEquals,
-  assertStrictEquals,
-  assertThrows,
-} from "@std/assert";
+import { assertAlmostEquals, assertEquals, assertThrows } from "@std/assert";
 import { Fraction } from "./fraction.ts";
 
 Deno.test("fraction of 1/1 is 1.0", () => {
