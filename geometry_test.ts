@@ -54,3 +54,55 @@ Deno.test("test radius circumference, area, and diagonal", () => {
   assertEquals(area, 2 * 3);
   assertAlmostEquals(diagonal, 3.606, 0.001);
 });
+
+Deno.test("for M(5,5) and r=5, expect N(5,10)", () => {
+  // Arrange
+  const circle = new Circle(new Point2D(5, 5), 5);
+  const expected = new Point2D(5, 10);
+
+  // Act
+  const actual = circle.north();
+
+  // Assert
+  assertEquals(actual.x, expected.x);
+  assertEquals(actual.y, expected.y);
+});
+
+Deno.test("for M(5,5) and r=5, expect E(10,5)", () => {
+  // Arrange
+  const circle = new Circle(new Point2D(5, 5), 5);
+  const expected = new Point2D(10, 5);
+
+  // Act
+  const actual = circle.east();
+
+  // Assert
+  assertEquals(actual.x, expected.x);
+  assertEquals(actual.y, expected.y);
+});
+
+Deno.test("for M(5,5) and r=5, expect S(5,0)", () => {
+  // Arrange
+  const circle = new Circle(new Point2D(5, 5), 5);
+  const expected = new Point2D(5, 0);
+
+  // Act
+  const actual = circle.south();
+
+  // Assert
+  assertEquals(actual.x, expected.x);
+  assertEquals(actual.y, expected.y);
+});
+
+Deno.test("for M(5,5) and r=5, expect W(0,5)", () => {
+  // Arrange
+  const circle = new Circle(new Point2D(5, 5), 5);
+  const expected = new Point2D(0, 5);
+
+  // Act
+  const actual = circle.west();
+
+  // Assert
+  assertEquals(actual.x, expected.x);
+  assertEquals(actual.y, expected.y);
+});
