@@ -1,3 +1,4 @@
+import { gcdBruteForce } from "./gcd.ts";
 import { roundTo } from "./utils.ts";
 
 export class Fraction {
@@ -8,6 +9,14 @@ export class Fraction {
     if (denominator == 0) {
       throw new Error("division by zero is undefined");
     }
+  }
+
+  get Numerator() {
+    return this.numerator;
+  }
+
+  get Denominator() {
+    return this.numerator;
   }
 
   public add(other: Fraction): Fraction {
@@ -55,5 +64,10 @@ export class Fraction {
       throw new Error(`non-numeric numerator/denominator`);
     }
     return new Fraction(numerator, denominator);
+  }
+
+  public cancel(): Fraction {
+    const gcd = gcdBruteForce(this.numerator, this.denominator);
+    return new Fraction(this.numerator / gcd, this.denominator / gcd);
   }
 }

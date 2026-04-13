@@ -1,4 +1,9 @@
-import { assertAlmostEquals, assertEquals, assertThrows } from "@std/assert";
+import {
+  assertAlmostEquals,
+  assertEquals,
+  assertStrictEquals,
+  assertThrows,
+} from "@std/assert";
 import { Fraction } from "./fraction.ts";
 
 Deno.test("fraction of 1/1 is 1.0", () => {
@@ -118,4 +123,43 @@ Deno.test("3/0 must not be allowed", () => {
   assertThrows(() => {
     new Fraction(3, 0);
   }, "division by zero is undefined");
+});
+
+Deno.test("cancel 1/1 is 1/1", () => {
+  // Arrange
+  const fraction = new Fraction(1, 1);
+  const expected = new Fraction(1, 1);
+
+  // Act
+  const actual = fraction.cancel();
+
+  // Assert
+  assertEquals(actual.Numerator, expected.Numerator);
+  assertEquals(actual.Denominator, expected.Denominator);
+});
+
+Deno.test("cancel 18/27 is 2/3", () => {
+  // Arrange
+  const fraction = new Fraction(18, 27);
+  const expected = new Fraction(2, 3);
+
+  // Act
+  const actual = fraction.cancel();
+
+  // Assert
+  assertEquals(actual.Numerator, expected.Numerator);
+  assertEquals(actual.Denominator, expected.Denominator);
+});
+
+Deno.test("cancel 81/54 is 3/2", () => {
+  // Arrange
+  const fraction = new Fraction(81, 54);
+  const expected = new Fraction(3, 2);
+
+  // Act
+  const actual = fraction.cancel();
+
+  // Assert
+  assertEquals(actual.Numerator, expected.Numerator);
+  assertEquals(actual.Denominator, expected.Denominator);
 });
