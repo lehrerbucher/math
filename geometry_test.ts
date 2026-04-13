@@ -186,3 +186,68 @@ Deno.test("if M is between S and N, it also is between N and S", () => {
   // Assert
   assertEquals(mBetweenNandSonY, mBetweenSandNonY);
 });
+
+Deno.test("rectangle encompasses circle", () => {
+  // Arrange
+  const rect = new Rectangle(new Point2D(0, 0), new Point2D(10, 10));
+  const circ = new Circle(new Point2D(5, 5), 1);
+  const expected = true;
+
+  // Act
+  const actual = rect.encompasses(circ);
+
+  // Assert
+  assertEquals(actual, expected);
+});
+
+Deno.test("rectangle does not encompass circle (top right)", () => {
+  // Arrange
+  const rect = new Rectangle(new Point2D(0, 0), new Point2D(10, 10));
+  const circ = new Circle(new Point2D(9, 9), 2);
+  const expected = false;
+
+  // Act
+  const actual = rect.encompasses(circ);
+
+  // Assert
+  assertEquals(actual, expected);
+});
+
+Deno.test("rectangle does not encompass circle (bottom left)", () => {
+  // Arrange
+  const rect = new Rectangle(new Point2D(0, 0), new Point2D(10, 10));
+  const circ = new Circle(new Point2D(1, 1), 2);
+  const expected = false;
+
+  // Act
+  const actual = rect.encompasses(circ);
+
+  // Assert
+  assertEquals(actual, expected);
+});
+
+Deno.test("rectangle does not encompass circle (bottom right)", () => {
+  // Arrange
+  const rect = new Rectangle(new Point2D(0, 0), new Point2D(10, 10));
+  const circ = new Circle(new Point2D(9, 1), 2);
+  const expected = false;
+
+  // Act
+  const actual = rect.encompasses(circ);
+
+  // Assert
+  assertEquals(actual, expected);
+});
+
+Deno.test("rectangle does not encompass circle (bottom middle)", () => {
+  // Arrange
+  const rect = new Rectangle(new Point2D(0, 0), new Point2D(10, 10));
+  const circ = new Circle(new Point2D(5, 1), 2);
+  const expected = false;
+
+  // Act
+  const actual = rect.encompasses(circ);
+
+  // Assert
+  assertEquals(actual, expected);
+});

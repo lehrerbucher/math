@@ -83,6 +83,19 @@ export class Rectangle implements Shape {
   }
 
   encompasses(other: Shape): boolean {
+    if (other instanceof Circle) {
+      const circ = other as Circle;
+      return (
+        circ.west().isBetweenX(this.bottomLeft, this.topRight) &&
+        circ.west().isBetweenY(this.bottomLeft, this.topRight) &&
+        circ.east().isBetweenX(this.bottomLeft, this.topRight) &&
+        circ.east().isBetweenY(this.bottomLeft, this.topRight) &&
+        circ.north().isBetweenX(this.bottomLeft, this.topRight) &&
+        circ.north().isBetweenY(this.bottomLeft, this.topRight) &&
+        circ.south().isBetweenX(this.bottomLeft, this.topRight) &&
+        circ.south().isBetweenY(this.bottomLeft, this.topRight)
+      );
+    }
     return false;
   }
 
