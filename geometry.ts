@@ -44,6 +44,15 @@ export class Circle implements Shape {
   }
 
   encompasses(other: Shape): boolean {
+    if (other instanceof Rectangle) {
+      const rect = other as Rectangle;
+      return (
+        this.center.distanceTo(rect.A) < this.radius &&
+        this.center.distanceTo(rect.B) < this.radius &&
+        this.center.distanceTo(rect.C) < this.radius &&
+        this.center.distanceTo(rect.D) < this.radius
+      );
+    }
     return false;
   }
 
@@ -101,6 +110,22 @@ export class Rectangle implements Shape {
 
   diagonal(): number {
     return this.bottomLeft.distanceTo(this.topRight);
+  }
+
+  get A(): Point2D {
+    return this.bottomLeft;
+  }
+
+  get B(): Point2D {
+    return new Point2D(this.topRight.x, this.bottomLeft.y);
+  }
+
+  get C(): Point2D {
+    return this.topRight;
+  }
+
+  get D(): Point2D {
+    return new Point2D(this.bottomLeft.x, this.topRight.y);
   }
 
   private width(): number {

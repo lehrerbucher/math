@@ -251,3 +251,29 @@ Deno.test("rectangle does not encompass circle (bottom middle)", () => {
   // Assert
   assertEquals(actual, expected);
 });
+
+Deno.test("circle encompasses rectangle", () => {
+  // Arrange
+  const circ = new Circle(new Point2D(5, 5), 5);
+  const rect = new Rectangle(new Point2D(4, 4), new Point2D(6, 6));
+  const expected = true;
+
+  // Act
+  const actual = circ.encompasses(rect);
+
+  // Assert
+  assertEquals(actual, expected);
+});
+
+Deno.test("circle does not encompass rectangle", () => {
+  // Arrange
+  const circ = new Circle(new Point2D(5, 5), 5);
+  const rect = new Rectangle(new Point2D(0, 0), new Point2D(6, 6));
+  const expected = false;
+
+  // Act
+  const actual = circ.encompasses(rect);
+
+  // Assert
+  assertEquals(actual, expected);
+});
