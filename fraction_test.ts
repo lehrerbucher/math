@@ -158,3 +158,48 @@ Deno.test("cancel 81/54 is 3/2", () => {
   assertEquals(actual.Numerator, expected.Numerator);
   assertEquals(actual.Denominator, expected.Denominator);
 });
+
+const autoCancelTests = [
+  {
+    l: new Fraction(1, 1),
+    r: new Fraction(1, 1),
+    o: "+",
+    e: new Fraction(2, 1),
+  },
+  {
+    l: new Fraction(2, 3),
+    r: new Fraction(3, 2),
+    o: "+",
+    e: new Fraction(13, 6),
+  },
+  {
+    l: new Fraction(13, 6),
+    r: new Fraction(3, 2),
+    o: "-",
+    e: new Fraction(2, 3),
+  },
+  {
+    l: new Fraction(99, 50),
+    r: new Fraction(1, 50),
+    o: "+",
+    e: new Fraction(2, 1),
+  },
+];
+
+Deno.test("test operations with auto cancellation", () => {
+  for (const { l, r, o, e } of autoCancelTests) {
+    let a: Fraction = new Fraction(1, 1);
+    switch (o) {
+      case "+":
+        a = l.add(r);
+        break;
+      case "-":
+        a = l.subtract(r);
+        break;
+      default:
+        throw new Error(`operator ${o} not covered by test runner`);
+    }
+    assertEquals(a.Denominator, e.Denominator);
+    assertEquals(a.Numerator, e.Numerator);
+  }
+});

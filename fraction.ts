@@ -9,6 +9,9 @@ export class Fraction {
     if (denominator == 0) {
       throw new Error("division by zero is undefined");
     }
+    const gcd = gcdEuclid(numerator, denominator);
+    this.numerator = numerator / gcd;
+    this.denominator = denominator / gcd;
   }
 
   get Numerator() {
