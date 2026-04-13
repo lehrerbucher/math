@@ -15,6 +15,18 @@ export class Point2D {
       Math.abs(this.x - other.x) ** 2 + Math.abs(this.y - other.y) ** 2,
     );
   }
+
+  isBetweenX(p: Point2D, q: Point2D): boolean {
+    const l = p.x < q.x ? p : q;
+    const r = p.x > q.x ? p : q;
+    return l.x < this.x && this.x < r.x;
+  }
+
+  isBetweenY(p: Point2D, q: Point2D): boolean {
+    const b = p.y < q.y ? p : q;
+    const t = p.y > q.y ? p : q;
+    return b.y < this.y && this.y < t.y;
+  }
 }
 
 export class Circle implements Shape {

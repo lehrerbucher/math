@@ -106,3 +106,83 @@ Deno.test("for M(5,5) and r=5, expect W(0,5)", () => {
   assertEquals(actual.x, expected.x);
   assertEquals(actual.y, expected.y);
 });
+
+Deno.test("M(5,5) is between W(0,5) and E(10,5) on x-axis", () => {
+  // Arrange
+  const m = new Point2D(5, 5);
+  const w = new Point2D(0, 5);
+  const e = new Point2D(10, 5);
+
+  // Act
+  const b = m.isBetweenX(w, e);
+
+  // Assert
+  assertEquals(b, true);
+});
+
+Deno.test("M(5,5) is between N(5,10) and S(5,0) on y-axis", () => {
+  // Arrange
+  const m = new Point2D(5, 5);
+  const n = new Point2D(5, 10);
+  const s = new Point2D(5, 0);
+
+  // Act
+  const b = m.isBetweenY(s, n);
+
+  // Assert
+  assertEquals(b, true);
+});
+
+Deno.test("W(0,5) is not between M(5,5) and E(5,10) on x-axis", () => {
+  // Arrange
+  const m = new Point2D(5, 5);
+  const w = new Point2D(0, 5);
+  const e = new Point2D(5, 10);
+
+  // Act
+  const b = w.isBetweenY(m, e);
+
+  // Assert
+  assertEquals(b, false);
+});
+
+Deno.test("N(5,10) is not between M(5,5) and S(5,0) on y-axis", () => {
+  // Arrange
+  const m = new Point2D(5, 5);
+  const n = new Point2D(5, 10);
+  const s = new Point2D(5, 0);
+
+  // Act
+  const b = n.isBetweenY(m, s);
+
+  // Assert
+  assertEquals(b, false);
+});
+
+Deno.test("if M is between E and W, it also is between W and E", () => {
+  // Arrange
+  const m = new Point2D(5, 5);
+  const e = new Point2D(10, 5);
+  const w = new Point2D(0, 5);
+
+  // Act
+  const mBetweenEandWonX = m.isBetweenX(e, w);
+  const mBetweenWandEonX = m.isBetweenX(w, e);
+
+  // Assert
+  assertEquals(mBetweenEandWonX, mBetweenWandEonX);
+});
+
+Deno.test("if M is between S and N, it also is between N and S", () => {
+  // Arrange
+  const m = new Point2D(5, 5);
+  const n = new Point2D(5, 10);
+  const s = new Point2D(5, 0);
+
+  // Act
+  const mBetweenNandSonY = m.isBetweenY(n, s);
+  const mBetweenSandNonY = m.isBetweenY(s, n);
+
+  // Assert
+  assertEquals(mBetweenNandSonY, mBetweenSandNonY);
+});
