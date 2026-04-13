@@ -1,4 +1,4 @@
-import { gcdBruteForce } from "./gcd.ts";
+import { gcdEuclid } from "./gcd.ts";
 import { roundTo } from "./utils.ts";
 
 export class Fraction {
@@ -67,7 +67,7 @@ export class Fraction {
   }
 
   public cancel(): Fraction {
-    const gcd = gcdBruteForce(this.numerator, this.denominator);
+    const gcd = gcdEuclid(this.numerator, this.denominator);
     return new Fraction(this.numerator / gcd, this.denominator / gcd);
   }
 }
